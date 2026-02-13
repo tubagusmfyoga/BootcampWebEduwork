@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+ <head>
+
+</head>
+
+  <meta charset="UTF-8">
+  <title>MY PORTOFOLIO</title>
+    <style>
+        /* Tabel pertama - sembunyikan border kanan, kiri, dan atas */
+        .header-table {
+            border-collapse: collapse;
+            width: 100%;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            border-bottom: 2px solid black;
+        }
+
+        .header-table td {
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            border-bottom: 1px solid black;
+            padding: 8px;
+        }
+
+        /* Tabel lainnya - tampilkan semua border */
+        .normal-table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        .normal-table td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Tabel pertama dengan border yang disembunyikan -->
+    <table class="header-table">
+        <tr>
+            <td><strong>Brand</strong></td>
+            <td style="text-align: right;">
+                <a href="#header">Header</a> 
+                <a href="#biodata">Biodata</a> 
+                <a href="#portofolio">Portofolio</a>
+            </td>
+        </tr>
+    </table>
+
+  <!-- Section 2: Judul kiri, gambar kanan -->
+  <table border="0" width="100%" id="header">
+    <tr>
+      <td width="50%">
+        <h1>TUBAGUS MUHAMMAD FADLA YOGA</h1>
+        <p>I made this for storing my portfolio and projects</p>
+        <button>learn</button>
+      </td>
+      <td width="50%" align="center">
+        <img src="poto_saya.webp" alt="Foto Profil" width="600" height="400">
+      </td>
+    </tr>
+  </table>
+
+  <!-- Section 3: Biodata dengan 6 box -->
+  <h2 id="biodata">About Me</h2>
+  <p>A brief introduction about myself</p>
+  <table border="1" width="100%">
+    <tr>
+      <td>Full Name</td>
+      <td>Education</td>
+      <td>Pekerjaan</td>
+    </tr>
+    <tr>
+      <td>Contact</td>
+      <td>Hobi</td>
+      <td>Alamat</td>
+    </tr>
+  </table>
+
+  <!-- Section 4: Portofolio -->
+  <h2 id="portofolio">Portofolio</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td align="center">
+        <img src="https://via.placeholder.com/350x200" alt="Proyek 1"><br>
+        <b>Proyek 1</b><br>
+        Deskripsi proyek 1.
+      </td>
+      <td align="center">
+        <img src="https://via.placeholder.com/350x200" alt="Proyek 2"><br>
+        <b>Proyek 2</b><br>
+        Deskripsi proyek 2.
+      </td>
+      <td align="center">
+        <img src="https://via.placeholder.com/350x200" alt="Proyek 3"><br>
+        <b>Proyek 3</b><br>
+        Deskripsi proyek 3.
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
