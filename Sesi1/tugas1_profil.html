@@ -6,21 +6,110 @@
     <title>MY PROFILE</title>
     <style>
       /* Header Navigation */
-      .header-nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 2px solid black;
-        padding: 15px 0;
-        margin-bottom: 40px;
-      }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
 
-      .nav-right a {
-        color: blue;
-        text-decoration: none;
-        margin-left: 15px;
-      }
+.brand {
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  flex-shrink: 0;  /* Jangan mengecil */
+}
 
+.brand-logo {
+  height: 80px;
+  width: 120px;
+}
+
+.brand:hover {
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
+.nav-menu-right {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+  margin-left: auto;
+}
+
+.nav-menu-right li {
+  display: inline;
+}
+
+.nav-menu-right a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-menu-right a:hover {
+  color: #0066cc;
+}
+
+/* Hamburger Menu - Hidden di Desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  gap: 5px;
+  padding: 0;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  border-radius: 3px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .navbar {
+    position: relative;
+  }
+
+  .hamburger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .nav-menu-right {
+    position: absolute;
+    top: 60px;
+    right: 1rem;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    gap: 0.5rem;
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    margin-left: 0;
+  }
+
+  .nav-menu-right.active {
+    display: flex;
+  }
+
+  .nav-menu-right a {
+    display: block;
+    padding: 0.5rem 0;
+  }
+}
       /* Hero Section */
       h1 {
         text-align: center;
@@ -115,14 +204,26 @@
   </head>
   <body>
     <!-- Header Navigation -->
-    <div class="header-nav">
-      <div><strong>Brand</strong></div>
-      <div class="nav-right">
-        <a href="#header">Header</a>
-        <a href="#biodata">Biodata</a>
-        <a href="#portofolio">Portofolio</a>
-      </div>
-    </div>
+<nav class="navbar">
+    <a href="index.html" class="brand">
+      <img src="logo_brand.png" alt="My Brand" class="brand-logo">
+    </a>
+    <!-- Hamburger Menu Icon -->
+  <button class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Navigation Menu -->
+  <ul class="nav-menu-right" id="navMenu">
+    <li><a href="#header">Header</a></li>
+    <li><a href="#biodata">Biodata</a></li>
+    <li><a href="#portfolio">Portofolio</a></li>
+  </ul>
+</nav>
+  </div>
+</nav>
 
     <div class="hero-container">
         <!-- 50% untuk Selamat Datang -->
@@ -131,9 +232,13 @@
           <p>
 This site is a place to store my projects and portfolio 
           </p>
-          <button type="button" class="btn btn-primary">Learn more...</button>
+          <button type="button" class="btn btn-primary btn-fit">Learn more...</button>
         </div>
-
+<style>.btn-fit{
+  padding: 0.25rem 0.5rem !important;
+  display: inline-block;
+}
+  </style>
         <!-- 50% untuk Foto -->
         <div class="hero-image">
           <img src="poto_saya.webp" alt="Foto Profile" />
@@ -148,21 +253,33 @@ This site is a place to store my projects and portfolio
     <div class="about-grid">
       <div class="about-item">
         <strong>Full Name</strong>
+        <p><b>TUBAGUS MUHAMMAD FADLA YOGA</b></p>
       </div>
       <div class="about-item">
         <strong>Education</strong>
+        <img src="logo-ur.png" alt="UNIVERSITAS RAHARJA" class="img-thumbnail">
+        <p><b>BACHELOR'S DEGREE at UNIVERSITAS RAHARJA</b></p>
+        <p><b>COMPUTER SYSTEM with GPA : 3.33/4.00</b></p>
       </div>
       <div class="about-item">
-        <strong>Pekerjaan</strong>
+        <strong>Skills</strong>
+        <p><b><ol class="list-group list-group-numbered">
+  <li>Programming</li>
+  <li>Data Processing</li>
+  <li>Graphic Design</li>
+</ol></b></p>
       </div>
       <div class="about-item">
         <strong>Contact</strong>
+        <p><b>tubagusmfyoga@gmail.com</b></p>
       </div>
       <div class="about-item">
-        <strong>Alamat</strong>
+        <strong>Address</strong>
+        <p><b>TANGERANG, BANTEN, INDONESIA</b></p>
       </div>
       <div class="about-item">
-        <strong>Hobi</strong>
+        <strong>Hobby</strong>
+        <p><b>TUBAGUS MUHAMMAD FADLA YOGA</b></p>
       </div>
     </div>
 
