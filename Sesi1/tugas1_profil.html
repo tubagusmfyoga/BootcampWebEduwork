@@ -7,7 +7,7 @@
     <style>
       /* Header Navigation */
 .navbar {
-  background-color: blue;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,7 +54,7 @@
 }
 
 .nav-menu-right a:hover {
-  color: #0066cc;
+  color: white;
 }
 
 /* Hamburger Menu - Hidden di Desktop */
@@ -117,7 +117,6 @@
         font-size: 2.5em;
         margin-bottom: 15px;
       }
-
       h2 {
         text-align: center;
         font-size: 1.8em;
@@ -127,7 +126,8 @@
       .hero-container {
         background-color: aquamarine;
         min-height: 10vh;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         align-items: center;
       }
 
@@ -156,6 +156,7 @@
       }
       /* About Grid */
       .about-grid {
+        background-color: aquamarine;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 20px;
@@ -220,7 +221,7 @@
 
   <!-- Navigation Menu -->
   <ul class="nav-menu-right" id="navMenu">
-    <li><a href="#header">Header</a></li>
+    <li><a href="#header">Home</a></li>
     <li><a href="#biodata">Biodata</a></li>
     <li><a href="#portfolio">Portofolio</a></li>
   </ul>
@@ -231,20 +232,18 @@
     <div class="hero-container">
         <!-- 50% untuk Selamat Datang -->
         <div class="hero-text">
-          <h1 style="color: blue;">Welcome to Goose Sites</h1>
+          <h1 style="color: black;">Welcome to Goose Sites</h1>
           <p>
 This site is a place to store my projects and portfolio 
           </p>
-          <button type="button" class="btn btn-primary btn-fit">Learn more...</button>
+          <div>
+            <button type="button" class="btn btn-primary btn-fit">Learn more...</button>
+          </div>
         </div>
-<style>.btn-fit{
-  padding: 0.25rem 0.5rem !important;
-  display: inline-block;
-}
-  </style>
+
         <!-- 50% untuk Foto -->
         <div class="hero-image">
-          <img src="poto_saya.webp" alt="Foto Profile" />
+          <img src="poto_saya.webp" alt="Foto Profile" class="img-fluid rounded-4"/>
         </div>
       </div>
     </div>
