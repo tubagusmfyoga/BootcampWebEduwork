@@ -10,16 +10,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
     $price = trim($_POST['price'] ?? '');
     $description = trim($_POST['description'] ?? '');
+    $category = trim($_POST['category'] ?? '');
+    $stock = trim($_POST['stock'] ?? '');
 
     if ($name === '') {
         $errors[] = 'Product name is required.';
     }
+
     if ($price === '') {
         $errors[] = 'Price is required.';
     } elseif (!is_numeric($price)) {
         $errors[] = 'Price must be a number.';
     } elseif ((float)$price < 0) {
         $errors[] = 'Price cannot be negative.';
+    }
+
+    if ($category === '') {
+        $errors[] = 'Category is required.';
+    }
+
+    if ($stock === '') {
+        $errors[] = 'Stock is required.';
+    } elseif (!is_numeric($stock)) {
+        $errors[] = 'Stock must be a number.';
+    } elseif ((int)$stock < 0) {
+        $errors[] = 'Stock cannot be negative.';
     }
 
     if (empty($errors)) {
@@ -65,6 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <li class="list-group-item"><strong>Name:</strong> <?php echo htmlspecialchars($name); ?></li>
                                 <li class="list-group-item"><strong>Price:</strong> <?php echo htmlspecialchars($price); ?></li>
                                 <li class="list-group-item"><strong>Description:</strong> <?php echo nl2br(htmlspecialchars($description)); ?></li>
+                                <li class="list-group-item"><strong>Category:</strong> <?php echo htmlspecialchars($category); ?></li>
+                                <li class="list-group-item"><strong>Stock:</strong> <?php echo htmlspecialchars($stock); ?></li>
                             </ul>
                             <a href="form_input.php" class="btn btn-primary">Add Another</a>
                         <?php endif; ?>

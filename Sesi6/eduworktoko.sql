@@ -42,21 +42,23 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `products` (
-  `product_id` int(11) NOT NULL,
+  `product_id` int(11) AUTO_INCREMENT PRIMARY KEY,
   `product_name` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   `descript` varchar(255) NOT NULL,
-  `stock` int(11) NOT NULL
+  `stock` int(11) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(user_id),
+  FOREIGN KEY (product_id) REFERENCES orders(product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_name`, `price`, `descript`, `stock`) VALUES
-(1, 'Handphone', 1999999, 'Xiaomi c5', 8),
-(2, 'Laptop', 3500000, 'Lenovo Bekas', 20),
-(3, 'Monitor', 1500000, 'Samsung', 10);
+INSERT INTO `products` (`product_name`, `price`, `descript`, `stock`) VALUES
+('Handphone', 1999999, 'Xiaomi c5', 8),
+('Laptop', 3500000, 'Lenovo Bekas', 20),
+('Monitor', 1500000, 'Samsung', 10);
 
 -- --------------------------------------------------------
 
@@ -65,56 +67,11 @@ INSERT INTO `products` (`product_id`, `product_name`, `price`, `descript`, `stoc
 --
 
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `user_id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Indexes for dumped tables
---
-
---
--- Indeks untuk tabel `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`);
-
---
--- Indeks untuk tabel `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`);
-
---
--- Indeks untuk tabel `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
-
---
--- AUTO_INCREMENT untuk tabel yang dibuang
---
-
---
--- AUTO_INCREMENT untuk tabel `orders`
---
-ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `products`
---
-ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT untuk tabel `users`
---
-ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

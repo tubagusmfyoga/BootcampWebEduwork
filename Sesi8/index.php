@@ -256,7 +256,10 @@ if (isset($_POST['add_to_cart'])) {
                 <p>&copy; 2026 Toko Online. Hak Cipta Dilindungi.</p>
             </div>
         </div>
+        <div>
+        </div>
     </footer>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>

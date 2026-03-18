@@ -19,6 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	} elseif (!is_numeric($price)) {
 		$errors[] = 'Price must be a number.';
 	}
+	if ($stock === '') {
+		$errors[] = 'Stock is required.';
+	} elseif (!is_numeric($stock)) {
+		$errors[] = 'Stock must be a number.';
+	} elseif ($stock < 0) {
+		$errors[] = 'Stock cannot be negative.';
+	}
+
+	if ($category === '') {
+		$errors[] = 'Category is required.';
+	}
+
 
 	if (empty($errors)) {
 		$success = true;
@@ -59,6 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							<li class="list-group-item"><strong>Name:</strong> <?php echo htmlspecialchars($name); ?></li>
 							<li class="list-group-item"><strong>Price:</strong> <?php echo htmlspecialchars($price); ?></li>
 							<li class="list-group-item"><strong>Description:</strong> <?php echo nl2br(htmlspecialchars($description)); ?></li>
+							<li class="list-group-item"><strong>Category:</strong> <?php echo htmlspecialchars($category); ?></li>
+							<li class="list-group-item"><strong>Stock:</strong> <?php echo htmlspecialchars($stock); ?></li>	
 						</ul>
 					<?php endif; ?>
 
@@ -79,10 +93,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							<label for="description" class="form-label">Description</label>
 							<textarea class="form-control" id="description" name="description" rows="4"><?php echo htmlspecialchars($description); ?></textarea>
 						</div>
+						<!-- CATEGORY -->
+						<div class="mb-3">
+							<label class="form-label">Category</label>
+							<select class="form-select" name="category" id="category">
+								<option value="">-- Select Category --</option>
+								<option value="Elektronik" <?= $category=='Elektronik'?'selected':'' ?>>Elektronik</option>
+								<option value="Fashion" <?= $category=='Fashion'?'selected':'' ?>>Fashion</option>
+								<option value="Home" <?= $category=='Home'?'selected':'' ?>>Home</option>
+								<option value="Beauty" <?= $category=='Beauty'?'selected':'' ?>>Beauty</option>
+							</select>
+							<div class="invalid-feedback" id="categoryFeedback"></div>
+						</div>
 
+						<!-- STOCK -->
+						<div class="mb-3">
+							<label class="form-label">Stock</label>
+							<input type="number" class="form-control" id="stock" name="stock" value="<?= htmlspecialchars($stock); ?>">
+							<div class="invalid-feedback" id="stockFeedback"></div>
+						</div>
 						<div class="d-flex justify-content-between">
 							<button type="submit" class="btn btn-primary">Add Product</button>
-							<button type="reset" class="btn btn-secondary">Reset</button>
 						</div>
 					</form>
 				</div>
@@ -94,68 +125,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script>
 document.addEventListener('DOMContentLoaded', function(){
 	const form = document.getElementById('productForm');
-	const nameInput = document.getElementById('name');
-	const priceInput = document.getElementById('price');
-	const nameFeedback = document.getElementById('nameFeedback');
-	const priceFeedback = document.getElementById('priceFeedback');
 
-	function clearFieldError(el, fb){
-		el.classList.remove('is-invalid');
-		fb.textContent = '';
-	}
-	function setFieldError(el, fb, msg){
+	const name = document.getElementById('name');
+	const price = document.getElementById('price');
+	const stock = document.getElementById('stock');
+	const category = document.getElementById('category');
+
+	function setError(el, msg){
 		el.classList.add('is-invalid');
-		fb.textContent = msg;
+		document.getElementById(el.id + 'Feedback').textContent = msg;
+	}
+	function clearError(el){
+		el.classList.remove('is-invalid');
+		document.getElementById(el.id + 'Feedback').textContent = '';
 	}
 
 	form.addEventListener('submit', function(e){
 		e.preventDefault();
-		let hasError = false;
-		clearFieldError(nameInput, nameFeedback);
-		clearFieldError(priceInput, priceFeedback);
+		let valid = true;
 
-		const name = nameInput.value.trim();
-		const price = priceInput.value.trim();
+		[name, price, stock, category].forEach(clearError);
 
-		if (!name) {
-			setFieldError(nameInput, nameFeedback, 'Product name is required.');
-			hasError = true;
+		if (name.value.trim() === '') {
+			setError(name, 'Product name is required.');
+			valid = false;
 		}
 
-		if (price === '') {
-			setFieldError(priceInput, priceFeedback, 'Price is required.');
-			hasError = true;
-		} else if (isNaN(price) || !isFinite(price)) {
-			setFieldError(priceInput, priceFeedback, 'Price must be a valid number.');
-			hasError = true;
-		} else if (Number(price) < 0) {
-			setFieldError(priceInput, priceFeedback, 'Price cannot be negative.');
-			hasError = true;
+		if (price.value.trim() === '' || isNaN(price.value)) {
+			setError(price, 'Price must be a valid number.');
+			valid = false;
 		}
 
-		if (!hasError) {
-			form.submit();
-		} else {
-			const firstInvalid = form.querySelector('.is-invalid');
-			if (firstInvalid) firstInvalid.focus();
+		if (stock.value.trim() === '') {
+			setError(stock, 'Stock is required.');
+			valid = false;
+		} else if (isNaN(stock.value) || Number(stock.value) < 0) {
+			setError(stock, 'Stock must be positive number.');
+			valid = false;
 		}
-	});
 
-	[nameInput, priceInput].forEach(function(el){
-		el.addEventListener('input', function(){
-			const fb = document.getElementById(el.id + 'Feedback');
-			clearFieldError(el, fb);
-		});
-	});
+		if (category.value === '') {
+			setError(category, 'Category is required.');
+			valid = false;
+		}
 
-	form.addEventListener('reset', function(){
-		// run after reset clears values
-		setTimeout(function(){
-			[nameInput, priceInput].forEach(function(el){
-				const fb = document.getElementById(el.id + 'Feedback');
-				clearFieldError(el, fb);
-			});
-		}, 0);
+		if (valid) form.submit();
 	});
 });
 </script>
