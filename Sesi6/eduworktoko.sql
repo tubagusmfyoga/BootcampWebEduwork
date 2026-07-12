@@ -18,21 +18,20 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `eduwork`
+-- Database: `eduworktoko`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `orders`
+-- Struktur dari tabel `users`
 --
 
-CREATE TABLE `orders` (
-  `order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `total` int(11) NOT NULL
+CREATE TABLE `users` (
+  `user_id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL UNIQUE,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -47,32 +46,37 @@ CREATE TABLE `products` (
   `price` int(11) NOT NULL,
   `descript` varchar(255) NOT NULL,
   `stock` int(11) NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (product_id) REFERENCES orders(product_id)
+  `category` varchar(100) NOT NULL,
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `products`
 --
 
-INSERT INTO `products` (`product_name`, `price`, `descript`, `stock`) VALUES
-('Handphone', 1999999, 'Xiaomi c5', 8),
-('Laptop', 3500000, 'Lenovo Bekas', 20),
-('Monitor', 1500000, 'Samsung', 10);
+INSERT INTO `products` (`product_name`, `price`, `descript`, `stock`, `category`, `image`) VALUES
+('Handphone', 1999999, 'Xiaomi c5', 8 , 'Elektronik' , 'xiaomi.jpg'),
+('Laptop', 3500000, 'Lenovo Bekas', 20 , 'Elektronik' , 'lenovo.jpg'),
+('Monitor', 1500000, 'Samsung', 10 , 'Elektronik' , 'samsung.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Struktur dari tabel `orders`
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) AUTO_INCREMENT PRIMARY KEY,
-  `username` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+CREATE TABLE `orders` (
+  `order_id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+
+  FOREIGN KEY (user_id) REFERENCES users(user_id),
+  FOREIGN KEY (product_id) REFERENCES products(product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+

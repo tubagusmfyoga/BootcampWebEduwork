@@ -164,8 +164,10 @@ if (isset($_GET['clear'])) {
                     <li class="nav-item">
                         <a class="nav-link active position-relative" href="cart.php">
                             <i class="fas fa-shopping-cart"></i> Keranjang
-                            <?php if (count($_SESSION['cart']) > 0): ?>
-                                <span class="cart-badge"><?php echo count($_SESSION['cart']); ?></span>
+                            <?php if (!empty($_SESSION['cart'])): ?>
+                                <span class="cart-badge">
+                                <?= count($_SESSION['cart']) ?>
+                                </span>
                             <?php endif; ?>
                         </a>
                     </li>

@@ -4,12 +4,16 @@ $errors = [];
 $name = '';
 $price = '';
 $description = '';
+$category = '';
+$stock = '';
 $success = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$name = trim($_POST['name'] ?? '');
 	$price = trim($_POST['price'] ?? '');
 	$description = trim($_POST['description'] ?? '');
+	$category = trim($_POST['category'] ?? '');
+	$stock = trim($_POST['stock'] ?? '');
 
 	if ($name === '') {
 		$errors[] = 'Product name is required.';
@@ -62,20 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							</ul>
 						</div>
 					<?php endif; ?>
-
-					<?php if ($success): ?>
-						<div class="alert alert-success">
-							Product added successfully (demo). Below are the submitted values:
-						</div>
-						<ul class="list-group mb-4">
-							<li class="list-group-item"><strong>Name:</strong> <?php echo htmlspecialchars($name); ?></li>
-							<li class="list-group-item"><strong>Price:</strong> <?php echo htmlspecialchars($price); ?></li>
-							<li class="list-group-item"><strong>Description:</strong> <?php echo nl2br(htmlspecialchars($description)); ?></li>
-							<li class="list-group-item"><strong>Category:</strong> <?php echo htmlspecialchars($category); ?></li>
-							<li class="list-group-item"><strong>Stock:</strong> <?php echo htmlspecialchars($stock); ?></li>	
-						</ul>
-					<?php endif; ?>
-
 					<form method="post" action="form_valid.php" id="productForm" novalidate>
 						<div class="mb-3">
 							<label for="name" class="form-label">Product Name</label>
